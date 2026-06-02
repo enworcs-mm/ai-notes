@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:openai.com)",
+      "WebFetch(domain:blog.google)",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:deepmind.google)",
+      "Bash(git pull *)"
+    ]
+  }
+}
