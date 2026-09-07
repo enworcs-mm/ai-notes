@@ -6,7 +6,10 @@
       "WebFetch(domain:blog.google)",
       "WebFetch(domain:www.anthropic.com)",
       "WebFetch(domain:deepmind.google)",
-      "Bash(git pull *)"
+      "Bash(git pull *)",
+      "Bash(git *)",
+      "WebFetch(domain:venturebeat.com)",
+      "Skill(claude-api)"
     ]
   }
 }
