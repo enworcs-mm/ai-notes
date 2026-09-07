@@ -50,8 +50,8 @@ last_updated: "2026-09-07"
 
 ## 【2026-08-17追記】8月の大型アップデートまとめ
 
-### Anthropic：Opus 4.7リリース＋事業規模がさらに拡大
-- **Claude Opus 4.7が一般提供開始**（8/8）。ソフトウェアエンジニアリング領域で前世代Opus 4.6から明確に進歩。ビジョン能力も画像解像度が3倍以上（最大2,576px）に向上。あるコーディングベンチマークでは「Opus 4.6が解けなかった93タスク中4つを新たに解決」。価格は据え置き（入力$5/出力$25、100万トークンあたり）。全製品・API・Bedrock・Vertex AI・Microsoft Foundryで利用可能。VentureBeatは「最強汎用LLMの座をわずかに奪還」と評（ソース: https://www.anthropic.com/news/claude-opus-4-7 ）
+### Anthropic：Opusティア世代交代＋事業規模がさらに拡大
+- **【2026-09-07訂正】Claude Opus 5が一般提供開始**（7/24）。当初この欄は日次フィードのノイズで「Opus 4.7（8/8）」としていたが、anthropic.com公式ではOpusティアはOpus 4.8の次に**Opus 5**（7/24）。「Opusティアの世代交代（step change improvement）」で、Fable 5のフロンティア知能に迫る性能を約半額で提供。ソフトウェアエンジニアリングとエージェント実務が主眼。日常のヘビーユース向け主力ティアという位置づけ（ソース: https://www.anthropic.com/news ）
 - **Claude Sonnet 5の導入価格（入力$2/出力$10、100万トークンあたり）が恒久化**（8/16）
 - ランレート収益は300億ドル超で継続確認（2025年末の約90億ドルから急増）。年間100万ドル以上の顧客は1,000社超で2ヶ月足らずに倍増
 - Blackstone・Hellman & Friedman・Goldman Sachsと共同で中堅企業向けエンタープライズAIサービス新会社を設立（8/11）
@@ -176,6 +176,42 @@ last_updated: "2026-09-07"
 - OpenAIとBroadcomがLLM推論最適化チップ「Jalapeño」を共同発表。OpenAI初のIntelligence Processorで、2026年末に初期展開予定
 - 複数世代にわたるコンピュートプラットフォーム構想の第一弾。Anthropicの「マルチベンダー（AWS Trainium・Google TPU・NVIDIA GPU）多様化」戦略に対し、OpenAIは自社製シリコンで垂直統合を進める動き
 - ソース: https://openai.com/index/openai-broadcom-jalapeno-inference-chip/
+
+## GPT-6 Astra vs Claude Fable 5 / 5.1【2026-09-07追記】
+
+### Anthropic側の対抗はポイントリリース（新世代ではない）
+- Fable 5（6/9）以降のAnthropicモデル: **Opus 5**（7/24、Opusティア世代交代）→ **Fable 5.1 / Mythos 5.1**（9/1、フラッグシップのポイントリリース）
+- Fable 5.1 = Astraへの実質的な回答。同価格（入力$10/出力$50）据え置きで①キャッシュ読み取り75%値下げ、②良性タスクを拒否していたセーフガードを緩和、③最難関エージェントタスクのスコアを大きく引き上げ
+- Anthropicは「一点集中の最高性能モデルを一律価格で」路線を堅持し、GPT-6のような世代ジャンプでは応じていない。「Mythos 6」等の大型版は公式・報道とも未予告
+
+### 設計思想の違い
+| 項目 | GPT-6 Astra | Claude Fable 5 / 5.1 |
+|---|---|---|
+| 主眼 | computer use（GUIを人のように操作）、ブラウザ・デスクトップアプリ横断 | コーディング＋ナレッジワーク＋長時間エージェント |
+| 提供 | 限定（Daybreak優先→順次）。サイバー能力がPreparedness Critical閾値到達 | 一般提供中 |
+| 価格（100万トークン、入力/出力） | $10/$50（Fastモード $20/$100） | $10/$50。5.1でキャッシュ読み75%減 |
+| 思考過程 | opaque recurrenceで非開示（透明性批判） | 開示 |
+
+### ベンチマーク比較（二次ソース中心、一次はWebFetch 403で未確認）
+| ベンチ | GPT-6 Astra | Fable 5.1 | 差 |
+|---|---|---|---|
+| Artificial Analysis Intelligence Index v4.1.1（独立集計） | 61.2 | **65.7** | Fable 5.1リード |
+| Terminal-Bench 4.0 | ~57.9 | 55.8 | Astraわずかに上 |
+| Terminal-Bench Science 0.1 | 64.6 | 52.6 | Astra明確に上 |
+| DeepSWE v1.1 | 74.1 | 67.4 | Astra上 |
+| Frontier Code | ほぼ同点 | ほぼ同点 | 拮抗 |
+| SWE-bench Pro | 直接比較値なし | 81.2（system card） | — |
+| OSWorld 2.0（computer use） | 72.6 | 公表なし | Astraの独壇場 |
+| FrontierMath T4 / ARC-AGI-3 / ExploitBench | 97.6 / ~99 / 100（OpenAI提示・ハーネス込み） | — | 飽和・ハーネス依存の指摘 |
+| ARC-AGI（コスト/タスク） | — | Fable 5比で約32%低コスト | — |
+
+### 読み筋
+- **OpenAI提示ベンチは軒並み飽和**（FrontierMath・ARC-AGI-3・ExploitBench）だが「エージェント構成込みでモデル単体の実力ではない」「GDPval非公開」の批判つき
+- **computer use / GUI操作 / サイバー**はAstraが明確に先行。Fableはこの土俵で勝負していない
+- **独立系の総合指標ではFable 5.1が僅差リード**（65.7 vs 61.2）。コーディングは実質互角
+- **コスパ・可用性**はFable 5.1有利（一般提供・キャッシュ75%減・低コスト/タスク、Astraは限定提供＋Fastは倍額）
+- 一言で: 「デスクトップを代行操作」ならAstra、「コードとナレッジワークを一律価格で今すぐ・透明に」ならFable 5.1。総合知能はまだFable 5.1が僅差で上、という構図
+- ソース: https://www.mindstudio.ai/blog/gpt-6-astra-benchmarks-analysis , https://www.vellum.ai/blog/claude-fable-5-1-mythos-5-1-benchmarks-explained , https://benchlm.ai/models/claude-fable-5-1 , https://www.nextbigfuture.com/2026/09/openai-gpt-6-astra-limited-release-that-beats-anthropic-fable-5-1-on-benchmarks.html
 
 ## 高性能化レースの展望
 - 2026年はAI史上最も密なリリースサイクル（2〜4月だけで7つのフロンティアモデル）。GPT-6・Claude 5(社内コード名Fennec)・Gemini 4のような大型ジャンプは噂止まりで、各社ともGPT-5.x/Claude 4.x系の細分化リリースに切り替え
